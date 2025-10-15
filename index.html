@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio | Muhammad Dwi Faiz Ilham</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #ffffff;
+            --secondary-color: #a7a7a7;
+            --bg-color: #121212;
+            --card-bg-color: #1e1e1e;
+            --accent-color: #007bff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 0 2rem;
+            overflow: hidden;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+        }
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 100;
+            background-color: transparent; /* Awalnya transparan */
+            padding: 1.5rem 0;
+            transition: background-color 0.4s ease, padding 0.4s ease;
+        }
+        
+        /* Style Navbar saat di-scroll */
+        .navbar.scrolled {
+            background-color: rgba(30, 30, 30, 0.95);
+            padding: 1rem 0;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .navbar .logo img {
+            height: 40px;
+            transition: transform 0.3s ease;
+        }
+        .navbar .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        .navbar ul li {
+            margin-left: 2rem;
+        }
+
+        .navbar ul li a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        /* Efek garis bawah pada link navbar */
+        .navbar ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease;
+        }
+
+        .navbar ul li a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('hero.jpg') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+        }
+        
+        #home h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        
+        /* Efek mengetik */
+        .typing-text {
+            color: var(--accent-color);
+        }
+        .typing-cursor {
+            display: inline-block;
+            background-color: var(--accent-color);
+            width: 3px;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink { 50% { background-color: transparent; } }
+        
+        #home p {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin: 0 0.5rem;
+            transform: translateY(0);
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            border: 2px solid var(--accent-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: transparent;
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-grid img {
+            width: 100%;
+            border-radius: 10px;
+            transition: transform 0.4s ease;
+        }
+        .about-grid img:hover {
+            transform: scale(1.05);
+        }
+
+        .about-grid h3 { font-size: 1.5rem; color: var(--accent-color); }
+        .about-grid p { color: var(--secondary-color); }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        
+        .skill-card {
+            background-color: var(--card-bg-color);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+        }
+        
+        .skill-card h3 { color: var(--accent-color); margin-bottom: 1rem; }
+        .skill-card ul { list-style: none; }
+        .skill-card ul li { margin-bottom: 0.5rem; color: var(--secondary-color); }
+        .skill-card ul li strong { color: var(--primary-color); }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .portfolio-item img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        .portfolio-content { padding: 1.5rem; }
+        .portfolio-content h3 { color: var(--accent-color); }
+        .portfolio-content p { color: var(--secondary-color); font-size: 0.9rem; }
+
+        /* Contact Section */
+        #contact .container { max-width: 700px; }
+        .contact-intro { text-align: center; margin-bottom: 2rem; }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #555;
+            background-color: var(--card-bg-color);
+            color: var(--primary-color);
+            border-radius: 5px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+        
+        .contact-form textarea { height: 150px; }
+        .contact-form .btn-primary { width: 100%; border: none; cursor: pointer; font-size: 1rem; }
+        .contact-details { text-align: center; margin-top: 3rem; }
+        .contact-details p { margin-bottom: 1rem; }
+        .contact-details a { color: var(--accent-color); text-decoration: none; }
+
+        /* Footer */
+        .footer { text-align: center; padding: 2rem 0; background-color: var(--card-bg-color); margin-top: 2rem; }
+        .footer p { color: var(--secondary-color); }
+
+        /* Kelas untuk Animasi Scroll */
+        .animated-item {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animated-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="container">
+            <a href="#home" class="logo"><img src="logo.png" alt="Logo"></a>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Tentang Saya</a></li>
+                    <li><a href="#skills">Kemampuan</a></li>
+                    <li><a href="#portfolio">Portofolio</a></li>
+                    <li><a href="#contact">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home">
+        <h1>Muhammad Dwi Faiz Ilham: <br> <span class="typing-text"></span><span class="typing-cursor">&nbsp;</span></h1>
+        <p class="animated-item">Lulusan SMA IT Al Bunyan yang bersemangat dalam kepemimpinan, berinisiatif tinggi, dan memiliki kemampuan untuk mengubah ide menjadi presentasi yang berdampak.</p>
+        <div class="animated-item">
+            <a href="#portfolio" class="btn btn-primary">Lihat Karya Saya</a>
+            <a href="#about" class="btn btn-secondary">Baca Tentang Saya</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title animated-item">Tentang Saya</h2>
+            <div class="about-grid">
+                <img src="profil.jpg" alt="Foto Profil" class="animated-item">
+                <div class="animated-item">
+                    <h3>Visi & Filosofi</h3>
+                    <p>Saya percaya bahwa komunikasi yang efektif adalah kunci kepemimpinan. Visi saya adalah menginspirasi melalui kata-kata dan tindakan, mengubah ide kompleks menjadi pesan yang mudah dipahami dan berdampak bagi audiens.</p><br>
+                    <h3>Latar Belakang</h3>
+                    <p>Saya adalah lulusan dari <strong>SMA IT Al Bunyan, Bogor</strong>. Selama di sana, saya aktif dalam berbagai kegiatan yang mengasah kemampuan kepemimpinan dan komunikasi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" style="background-color: var(--card-bg-color);">
+        <div class="container">
+            <h2 class="section-title animated-item">Kemampuan</h2>
+            <div class="skills-grid">
+                <div class="skill-card animated-item">
+                    <h3>Komunikasi & Presentasi</h3>
+                    <ul>
+                        <li><strong>Public Speaking:</strong> Ahli dalam menyampaikan ide secara jelas dan meyakinkan.</li>
+                        
+                    </ul>
+                </div>
+                <div class="skill-card animated-item" style="transition-delay: 0.2s;">
+                    <h3>Kepemimpinan & Organisasi</h3>
+                    <ul>
+                        <li><strong>Kepemimpinan Teruji:</strong> Kemampuan memimpin tim, terbukti melalui pengalaman di tim basket.</li>
+                        <li><strong>Inisiatif Tinggi:</strong> Selalu proaktif dalam mencari solusi dan memulai tindakan.</li>
+                    </ul>
+                </div>
+                <div class="skill-card animated-item" style="transition-delay: 0.4s;">
+                    <h3>Keterampilan Praktis</h3>
+                    <ul>
+                        <li><strong>Mandiri:</strong> Bertanggung jawab penuh atas tugas yang diberikan.</li>
+                        <li><strong>Perhatian Terhadap Detail:</strong> Mencerminkan kedisiplinan dan tanggung jawab.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title animated-item">Portofolio</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item animated-item">
+                    <img src="prestasi.jpg" alt="English Reporter Competition">
+                    <div class="portfolio-content">
+                        <h3>English Reporter Competition</h3>
+                        <p>Berperan sebagai reporter yang menyajikan informasi secara cepat, jelas, dan meyakinkan dalam Bahasa Inggris. Bukti nyata kemampuan presentasi di bawah tekanan.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animated-item" style="transition-delay: 0.2s;">
+                    <img src="prestasi (2).JPG" alt="Kepemimpinan Tim Basket">
+                    <div class="portfolio-content">
+                        <h3>Kepemimpinan Tim Basket</h3>
+                        <p>Menyoroti soft skill kepemimpinan dan komunikasi. Belajar memotivasi tim, menyusun strategi, dan mengatasi konflik—keterampilan vital bagi pembicara publik.</p>
+                    </div>
+                </div>
+                <div class="portfolio-item animated-item" style="transition-delay: 0.4s;">
+                    <img src="prestasi (3).JPG" alt="Proyek Lain">
+                    <div class="portfolio-content">
+                        <h3>Sorotan Proyek Lainnya</h3>
+                        <p>Berbagai proyek dan kegiatan lain yang telah membentuk kemampuan saya dalam berorganisasi, berkomunikasi, dan memimpin secara efektif.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="contact-intro animated-item">
+                <h2 class="section-title">Mari Berdiskusi</h2>
+                <p>Saya Siap Membawa Suara ke Panggung Anda.</p>
+            </div>
+            
+            <form class="contact-form animated-item" action="#" method="POST">
+                <input type="text" name="nama" placeholder="Nama Anda" required>
+                <input type="email" name="email" placeholder="Email Anda" required>
+                <textarea name="pesan" placeholder="Pesan Anda" required></textarea>
+                <button type="submit" class="btn btn-primary">Kirim Pesan</button>
+            </form>
+
+            <div class="contact-details animated-item">
+                <p>Email: <a href="mailto:emailanda@example.com">emailanda@example.com</a></p>
+                <p>LinkedIn: <a href="#" target="_blank">linkedin.com/in/username-anda</a></p>
+                <br>
+                <a href="#" class="btn btn-secondary">Unduh CV/Resume Saya</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Muhammad Dwi Faiz Ilham. Semua hak cipta dilindungi.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+
+            // 1. Animasi Navbar saat Scroll
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // 2. Animasi Elemen saat Scroll (Fade-in & Slide-up)
+            const animatedItems = document.querySelectorAll('.animated-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Muncul saat 10% elemen terlihat
+            });
+            animatedItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // 3. Efek Mengetik (Typing Effect)
+            const typingTextElement = document.querySelector('.typing-text');
+            const words = ["Public Speaker.", "Penggerak Komunikasi.", "Fasih Berbahasa Inggris."];
+            let wordIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function type() {
+                const currentWord = words[wordIndex];
+                const typeSpeed = isDeleting ? 75 : 150;
+
+                if (isDeleting) {
+                    typingTextElement.textContent = currentWord.substring(0, charIndex--);
+                } else {
+                    typingTextElement.textContent = currentWord.substring(0, charIndex++);
+                }
+
+                if (!isDeleting && charIndex === currentWord.length) {
+                    setTimeout(() => isDeleting = true, 2000); // Tunggu sebelum menghapus
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    wordIndex = (wordIndex + 1) % words.length;
+                }
+                
+                setTimeout(type, typeSpeed);
+            }
+            
+            type();
+        });
+    </script>
+</body>
+</html>
